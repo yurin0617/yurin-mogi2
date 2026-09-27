@@ -41,4 +41,45 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * ユーザーが登録した書籍一覧（1対多）
+     */
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
+
+    /**
+     * ユーザーが投稿したレビュー一覧（1対多）
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * ユーザーがお気に入り登録している書籍一覧（多対多）
+     * ※カスタム中間テーブル名 'book_user_favorites' を指定
+     */
+    public function favoriteBooks()
+    {
+        return $this->belongsToMany(Book::class, 'book_user_favorites');
+    }
+
+    /**
+     * ユーザーが「いいね」しているレビュー一覧（多対多）
+     */
+    public function likedReviews()
+    {
+        return $this->belongsToMany(Review::class, 'review_likes');
+    }
+
+    /**
+     * ユーザーの読書計画一覧（1対多・応用）
+     */
+    public function readingPlans()
+    {
+        return $this->hasMany(ReadingPlan::class);
+    }
 }
