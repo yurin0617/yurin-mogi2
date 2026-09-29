@@ -14,8 +14,12 @@ class BookController extends Controller
      */
     public function index()
     {
-        // 投稿者情報とジャンルを一緒に取得（N+1問題対策）して新しい順にページネーション
-        $books = Book::with(['user', 'genres'])->latest()->paginate(10);
+        // withAvg('reviews', 'rating') を追加して平均評価も一緒に取得する
+        $books = Book::with(['user', 'genres'])
+            ->withAvg('reviews', 'rating')
+            ->latest()
+            ->paginate(10);
+
         return view('books.index', compact('books'));
     }
 
@@ -48,7 +52,13 @@ class BookController extends Controller
     public function show(Book $book)
     {
         // 関連するデータ（投稿者、ジャンル、レビューとその投稿者など）をロード
-        $book->load(['user', 'genres', 'reviews.user']);
+        // ビューで使われているリレーションをすべて with で事前に取得する
+        $book->load([
+            'genres',
+            'reviews.user',
+            'reviews.likedByUsers'
+        ]);
+
         return view('books.show', compact('book'));
     }
 
