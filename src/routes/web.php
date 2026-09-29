@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\ReviewLikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,22 +28,19 @@ Route::resource('books.reviews', ReviewController::class)->only([
     'destroy'
 ]);
 
-// ランキング機能を作るまでの仮のダミー定義（エラー回避用）
-Route::get('/ranking', function () {
-    return 'ランキングページ（準備中）';
-})->name('ranking.index');
-// お気に入り機能を作るまでの仮のダミー定義（エラー回避用）
-Route::get('/favorites', function () {
-    return 'お気に入りページ（準備中）';
-})->name('favorites.index');
+// お気に入りトグル処理
+Route::post('/books/{book}/favorites', [FavoriteController::class, 'store'])->name('favorites.store');
+
+// お気に入り一覧画面
+Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+
+// レビューへのいいねトグル処理
+Route::post('/reviews/{review}/like', [ReviewLikeController::class, 'store'])->name('reviews.like');
+
 // --- 以下、今後のマイルストーンで実装するまでの仮のダミー定義（エラー回避用） ---
 Route::get('/ranking', function () {
     return 'ランキングページ（準備中）';
 })->name('ranking.index');
-
-Route::get('/favorites', function () {
-    return 'お気に入りページ（準備中）';
-})->name('favorites.index');
 
 Route::get('/genres', function () {
     return 'ジャンルページ（準備中）';
