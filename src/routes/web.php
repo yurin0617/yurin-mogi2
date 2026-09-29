@@ -6,6 +6,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewLikeController;
 use App\Http\Controllers\RankingController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +42,10 @@ Route::post('/reviews/{review}/like', [ReviewLikeController::class, 'store'])->n
 // ランキング一覧画面
 Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
 
+// ジャンル管理のCRUDルーティング
+Route::resource('genres', GenreController::class);
+
 // --- 以下、今後のマイルストーンで実装するまでの仮のダミー定義（エラー回避用） ---
-Route::get('/genres', function () {
-    return 'ジャンルページ（準備中）';
-})->name('genres.index');
 // ログインページの仮定義（エラー回避用）
 Route::get('/login', function () {
     return 'ログインページ（準備中）';
