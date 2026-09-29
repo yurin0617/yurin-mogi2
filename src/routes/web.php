@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewLikeController;
+use App\Http\Controllers\RankingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,11 +38,10 @@ Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.
 // レビューへのいいねトグル処理
 Route::post('/reviews/{review}/like', [ReviewLikeController::class, 'store'])->name('reviews.like');
 
-// --- 以下、今後のマイルストーンで実装するまでの仮のダミー定義（エラー回避用） ---
-Route::get('/ranking', function () {
-    return 'ランキングページ（準備中）';
-})->name('ranking.index');
+// ランキング一覧画面
+Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
 
+// --- 以下、今後のマイルストーンで実装するまでの仮のダミー定義（エラー回避用） ---
 Route::get('/genres', function () {
     return 'ジャンルページ（準備中）';
 })->name('genres.index');
