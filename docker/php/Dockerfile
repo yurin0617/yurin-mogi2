@@ -1,4 +1,8 @@
-FROM php:8.1-fpm
+FROM php:8.2-fpm
+
+# PHPの拡張機能などの設定の下、またはapt installの周辺に以下を追加
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+    && apt-get install -y nodejs
 
 COPY php.ini /usr/local/etc/php/
 
