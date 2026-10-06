@@ -23,7 +23,7 @@ class BookRelationTest extends TestCase
             'password' => bcrypt('password'),
         ]);
 
-        $book = new Book();
+        $book = new Book;
         $book->title = 'Laravel入門';
         $book->author = 'テスト著者A';
         $book->user_id = $user->id;
@@ -45,7 +45,7 @@ class BookRelationTest extends TestCase
             'password' => bcrypt('password'),
         ]);
 
-        $book = new Book();
+        $book = new Book;
         $book->title = 'Laravel実践';
         $book->author = 'テスト著者B';
         $book->user_id = $user->id;

@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -31,8 +30,6 @@ class Handler extends ExceptionHandler
 
     /**
      * Register the exception handling callbacks for the application.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -40,7 +37,7 @@ class Handler extends ExceptionHandler
             // リクエストがAPI（/api/ で始まる場合）のときだけJSONを返す
             if ($request->is('api/*')) {
                 return response()->json([
-                    'message' => '指定されたリソースが見つかりません。'
+                    'message' => '指定されたリソースが見つかりません。',
                 ], 404);
             }
         });

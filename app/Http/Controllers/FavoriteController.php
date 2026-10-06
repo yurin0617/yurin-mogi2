@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
@@ -18,7 +17,7 @@ class FavoriteController extends Controller
         $user = Auth::user();
 
         // ログインしていなければログインページへリダイレクト
-        if (!$user) {
+        if (! $user) {
             return redirect()->route('login');
         }
 
@@ -34,11 +33,11 @@ class FavoriteController extends Controller
     public function store(Book $book)
     {
         /** @var User $user */
-    // ログイン中のユーザーを取得（※一時的にAuth::id()を使用。認証機能実装後にそのまま連動します）
+        // ログイン中のユーザーを取得（※一時的にAuth::id()を使用。認証機能実装後にそのまま連動します）
         $user = Auth::user();
 
         // ★未ログインの場合はログインページへリダイレクト
-        if (!$user) {
+        if (! $user) {
             return redirect()->route('login');
         }
         // すでにお気に入り登録しているかチェック

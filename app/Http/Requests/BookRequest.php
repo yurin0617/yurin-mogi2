@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Book;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -22,7 +23,7 @@ class BookRequest extends FormRequest
     {
         // 編集時のユニークチェックで、自分自身のISBN重複エラーを防ぐためのID取得
         $book = $this->route('book');
-        $bookId = $book instanceof \App\Models\Book ? $book->id : $book;
+        $bookId = $book instanceof Book ? $book->id : $book;
 
         return [
             'title' => ['required', 'string', 'max:255'],

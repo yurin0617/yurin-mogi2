@@ -501,10 +501,12 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Database\\Seeders\\' =>
         array (
             0 => __DIR__ . '/../..' . '/database/seeders',
+            1 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
         ),
         'Database\\Factories\\' =>
         array (
             0 => __DIR__ . '/../..' . '/database/factories',
+            1 => __DIR__ . '/..' . '/laravel/pint/database/factories',
         ),
         'Cron\\' =>
         array (
@@ -525,6 +527,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\' =>
         array (
             0 => __DIR__ . '/../..' . '/app',
+            1 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
     );
 
@@ -6857,8 +6860,17 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Termwind\\ValueObjects\\Style' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Style.php',
         'Termwind\\ValueObjects\\Styles' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
+        'Tests\\Feature\\Api\\V1\\BookApiTest' => __DIR__ . '/../..' . '/tests/Feature/Api/V1/BookApiTest.php',
+        'Tests\\Feature\\Auth\\RegistrationFeatureTest' => __DIR__ . '/../..' . '/tests/Feature/Auth/RegistrationFeatureTest.php',
+        'Tests\\Feature\\BookFeatureTest' => __DIR__ . '/../..' . '/tests/Feature/BookFeatureTest.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
+        'Tests\\Feature\\FavoriteFeatureTest' => __DIR__ . '/../..' . '/tests/Feature/FavoriteFeatureTest.php',
+        'Tests\\Feature\\GenreFeatureTest' => __DIR__ . '/../..' . '/tests/Feature/GenreFeatureTest.php',
+        'Tests\\Feature\\RankingFeatureTest' => __DIR__ . '/../..' . '/tests/Feature/RankingFeatureTest.php',
+        'Tests\\Feature\\ReviewFeatureTest' => __DIR__ . '/../..' . '/tests/Feature/ReviewFeatureTest.php',
+        'Tests\\Feature\\ReviewLikeFeatureTest' => __DIR__ . '/../..' . '/tests/Feature/ReviewLikeFeatureTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
+        'Tests\\Unit\\BookRelationTest' => __DIR__ . '/../..' . '/tests/Unit/BookRelationTest.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',

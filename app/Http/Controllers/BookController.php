@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use App\Models\Genre;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class BookController extends Controller
 {
     /**
      * 書籍一覧画面
      */
-    public function index()
+    public function index(): View
     {
-        // withAvg('reviews', 'rating') を追加して平均評価も一緒に取得する
         $books = Book::with(['user', 'genres'])
             ->withAvg('reviews', 'rating')
             ->latest()
@@ -26,21 +27,19 @@ class BookController extends Controller
     /**
      * 書籍登録画面
      */
-    public function create()
+    public function create(): View
     {
         $genres = Genre::all();
+
         return view('books.create', compact('genres'));
     }
 
     /**
      * 書籍の保存処理
      */
-    public function store(BookRequest $request)
+    public function store(BookRequest $request): RedirectResponse
     {
-        // ログイン中のユーザーの書籍として新規作成
         $book = Auth::user()->books()->create($request->validated());
-
-        // 選択されたジャンルを中間テーブルに紐づけ
         $book->genres()->sync($request->genres);
 
         return redirect()->route('books.index')->with('success', '書籍を登録しました。');
@@ -49,14 +48,12 @@ class BookController extends Controller
     /**
      * 書籍詳細画面
      */
-    public function show(Book $book)
+    public function show(Book $book): View
     {
-        // 関連するデータ（投稿者、ジャンル、レビューとその投稿者など）をロード
-        // ビューで使われているリレーションをすべて with で事前に取得する
         $book->load([
             'genres',
             'reviews.user',
-            'reviews.likedByUsers'
+            'reviews.likedByUsers',
         ]);
 
         return view('books.show', compact('book'));
@@ -65,21 +62,20 @@ class BookController extends Controller
     /**
      * 書籍編集画面
      */
-    public function edit(Book $book)
+    public function edit(Book $book): View
     {
-        // Policyを使って「作成者本人か」をチェック
         $this->authorize('update', $book);
 
         $genres = Genre::all();
+
         return view('books.edit', compact('book', 'genres'));
     }
 
     /**
      * 書籍更新処理
      */
-    public function update(BookRequest $request, Book $book)
+    public function update(BookRequest $request, Book $book): RedirectResponse
     {
-        // Policyを使って「作成者本人か」をチェック
         $this->authorize('update', $book);
 
         $book->update($request->validated());
@@ -91,9 +87,8 @@ class BookController extends Controller
     /**
      * 書籍削除処理
      */
-    public function destroy(Book $book)
+    public function destroy(Book $book): RedirectResponse
     {
-        // Policyを使って「作成者本人か」をチェック
         $this->authorize('delete', $book);
 
         $book->delete();

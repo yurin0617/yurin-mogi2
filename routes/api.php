@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\V1\BookController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\BookController; // ★この行を追加します
+use Illuminate\Support\Facades\Route; // ★この行を追加します
 
 /*
 |--------------------------------------------------------------------------

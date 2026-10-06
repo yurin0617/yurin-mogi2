@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\Api\V1;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookResource extends JsonResource
@@ -22,7 +21,7 @@ class BookResource extends JsonResource
                 return round($this->reviews_avg_rating ?? $this->reviews->avg('rating'), 1);
             }),
             'genres' => $this->whenLoaded('genres', function () {
-                return $this->genres->map(fn($genre) => [
+                return $this->genres->map(fn ($genre) => [
                     'id' => $genre->id,
                     'name' => $genre->name,
                 ]);

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
 use App\Http\Resources\Api\V1\BookResource;
 use App\Models\Book;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class BookController extends Controller
@@ -13,7 +15,7 @@ class BookController extends Controller
     /**
      * 書籍一覧取得
      */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         $books = Book::with(['user', 'genres'])
             ->withAvg('reviews', 'rating')
@@ -26,9 +28,9 @@ class BookController extends Controller
     /**
      * 書籍新規登録
      */
-    public function store(BookRequest $request)
+    public function store(BookRequest $request): JsonResponse
     {
-        $book = Book::create($request->validated());
+        $book = $request->user()->books()->create($request->validated());
         $book->genres()->sync($request->input('genres', []));
 
         return (new BookResource($book->load(['user', 'genres'])))
@@ -39,16 +41,17 @@ class BookController extends Controller
     /**
      * 書籍詳細取得
      */
-    public function show(Book $book)
+    public function show(Book $book): BookResource
     {
         $book->load(['user', 'genres', 'reviews']);
+
         return new BookResource($book);
     }
 
     /**
      * 書籍更新
      */
-    public function update(BookRequest $request, Book $book)
+    public function update(BookRequest $request, Book $book): BookResource
     {
         $book->update($request->validated());
         $book->genres()->sync($request->input('genres', []));
@@ -59,7 +62,7 @@ class BookController extends Controller
     /**
      * 書籍削除
      */
-    public function destroy(Book $book)
+    public function destroy(Book $book): JsonResponse
     {
         $book->delete();
 
