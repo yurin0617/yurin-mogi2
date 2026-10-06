@@ -68,9 +68,9 @@ php artisan test
 
 ## 使用技術(実行環境)
 ```
-- PHP: 8.2
-- フレームワーク: Laravel 10.48
-- データベース: MySQL 8.0
+- PHP: 8.5.11
+- フレームワーク: Laravel 10.50.3
+- データベース: MySQL 8.0.46
 - インフラ・環境構築: Docker / Laravel Sail
 - API認証・連携: Laravel Sanctum / RESTful API (V1)
 - コード品質・規約チェック: Laravel Pint
@@ -86,3 +86,9 @@ php artisan test
 
 ## ER図
 ![ER図](ER.drawio.png)
+
+## 動作確認・テスト用のデフォルトユーザー
+```
+email：test@example.com
+password：password123
+```
